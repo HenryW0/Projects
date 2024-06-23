@@ -1,0 +1,75 @@
+<style>
+
+	body {
+            margin: 0;
+            padding: 0;
+			background-color: #1f2f40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+			text-align:center;
+        }
+	
+</style>
+
+	<script src="moveableShapes_hw.js"></script>
+	<canvas id="canvas" width="800" height="600"></canvas>
+
+	<script>
+		const DEFAULT_SPEED = 5;
+	
+		//var is not needed since it is already global scope, remove this 
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var left = false;
+		var right = false;
+		const board = new Rectangle(0, 0, 800, 600, "black");
+		var player = new Rectangle(200, 200, 100, 100, "white"); 
+		
+		window.onload = function() {
+		
+			document.addEventListener("keyup", keyup)
+			document.addEventListener("keydown", keydown)
+			setInterval(gameloop, 1000/60);
+		}
+		
+		function keyup(evt){
+			switch(evt.keyCode){
+				case 37: left = false; break;
+				case 39: right = false; break;
+			}
+		}
+		
+		function keydown(evt){
+			switch(evt.keyCode){
+				case 37: left = true; break;
+				case 39: right = true; break;
+			}
+		}
+		
+		function gameloop(){
+			gameLogic();
+			paintScreen([board, player]);
+		}
+		
+		function gameLogic(){
+			if (left){
+				player.moveX(-DEFAULT_SPEED);
+			}
+			
+			if (right){
+				player.moveX(DEFAULT_SPEED);
+			}
+		}
+		
+		//Painting should be array of all rectangle objects
+		function paintScreen(painting){
+			for (const n of painting){
+				n.paint(ctx);
+			}
+		}
+		
+		
+	</script>
+</body>
