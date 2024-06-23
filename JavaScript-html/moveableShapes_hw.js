@@ -5,9 +5,9 @@ class Moveable{
 	}
 	
 	moveX(speed){
-		//Update position, then check if the position is valid
-		//Doing this because checkIntersect expects rectangles
-		//Not the best method but it will work
+		//TODO
+		//Check if position is valid, either will have to make temp rectangle
+		//or create better util method for checking overlaps that do not require rectangles
 		this.x += speed
 	}
 	
